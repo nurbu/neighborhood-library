@@ -9,11 +9,11 @@ public class BookInventory {
 
     public static void main(String[] args) {
 
-        books[0] = new Book(1, "9780241412039", "Diary of a Wimpy Kid: WRECKING BALL", false, null);
-        books[1] = new Book(2, "9780810983915", "Diary of a Wimpy Kid: Dog Days", false, null);
-        books[2] = new Book(3, "9780241745168", "Diary of a Wimpy Kid: Party Pooper", false, null);
-        books[3] = new Book(4, "9780241322000", "Diary of a Wimpy Kid: The Meltdown", false, null);
-        books[4] = new Book(5, "9781419711893", "Diary of a Wimpy Kid: The Long Haul", false, null);
+        books[0] = new Book(1, "9780241412039", "Diary of a Wimpy Kid: WRECKING BALL", false, "");
+        books[1] = new Book(2, "9780810983915", "Diary of a Wimpy Kid: Dog Days", false, "");
+        books[2] = new Book(3, "9780241745168", "Diary of a Wimpy Kid: Party Pooper", false, "");
+        books[3] = new Book(4, "9780241322000", "Diary of a Wimpy Kid: The Meltdown", false, "");
+        books[4] = new Book(5, "9781419711893", "Diary of a Wimpy Kid: The Long Haul", false, "");
 
         Scanner scan = new Scanner(System.in);
 
@@ -33,10 +33,10 @@ public class BookInventory {
 
             switch (userChoice) {
                 case 1:
-                    displayBooks();
+                    displayAvailableBooks(scan);
                     break;
                 case 2:
-                    displayCheckedOutBooks();
+                    displayCheckedOutBooks(scan);
                     break;
                 case 3:
                     System.out.println("Thank you for coming!");
@@ -49,12 +49,47 @@ public class BookInventory {
         }
     }
 
-    public static void displayBooks() {
+    public static void displayAvailableBooks(Scanner scan) {
 
+        System.out.println("\nAvailable Books");
+        System.out.println("\n======================\n");
+
+        for (int i = 0; i < numBooks; i++) {
+
+            if (books[i].isCheckedOut() == false) {
+                System.out.println(books[i]);
+            }
+        }
+
+        System.out.println("\n1: Would you like to checkout a book?");
+        System.out.println("2: Exit to Home Screen");
+        System.out.print("Enter your choice: ");
+        int userChoice = scan.nextInt();
+        scan.nextLine();
+
+        switch (userChoice) {
+            case 1:
+                checkOutBook(scan);
+                break;
+            case 2:
+                break;
+            default:
+                System.out.println("Invalid choice");
+        }
     }
 
-    public static void displayCheckedOutBooks() {
-
+    public static void checkOutBook(Scanner scan) {
+        System.out.print("Enter your name: ");
+        String name = scan.nextLine();
+        System.out.print("\nEnter the Id of the book you would like to checkout: ");
+        int bookCheckingOutId = scan.nextInt();
+        scan.nextLine();
+        for (int i = 0; i < numBooks; i++) {
+            if (books[i].getId() == bookCheckingOutId) {
+                books[i].setCheckedOut(true);
+                books[i].setCheckedOutTo(name);
+            }
+        }
     }
 
-}
+
