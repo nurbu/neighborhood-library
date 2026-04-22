@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class BookInventory {
     private static Book[] books = new Book[20];
-
     private static int numBooks = 5;
 
     public static void main(String[] args) {
@@ -49,6 +48,7 @@ public class BookInventory {
         }
     }
 
+    // Displays all available books
     public static void displayAvailableBooks(Scanner scan) {
 
         System.out.println("\nAvailable Books");
@@ -78,6 +78,7 @@ public class BookInventory {
         }
     }
 
+    //Allows the user to check out books after seeing which books are available
     public static void checkOutBook(Scanner scan) {
         System.out.print("Enter your name: ");
         String name = scan.nextLine();
@@ -92,6 +93,7 @@ public class BookInventory {
         }
     }
 
+    // Displays all currently checked out books
     public static void displayCheckedOutBooks(Scanner scan) {
         for (int i = 0; i < numBooks; i++) {
             if (books[i].isCheckedOut() == true) {
@@ -115,6 +117,7 @@ public class BookInventory {
 
     }
 
+    // Allows the user to check in any checked out books
     public static void checkInBook(Scanner scan) {
         System.out.println("Enter the Id of the book you would like to check in: ");
         int bookCheckingInId = scan.nextInt();
