@@ -92,4 +92,41 @@ public class BookInventory {
         }
     }
 
+    public static void displayCheckedOutBooks(Scanner scan) {
+        for (int i = 0; i < numBooks; i++) {
+            if (books[i].isCheckedOut() == true) {
+                System.out.println(books[i] + " checkedout by " + books[i].getCheckedOutTo());
+            }
+        }
+        System.out.println("C: Would you like to check in a book? ");
+        System.out.println("X: Exit to Home Screen");
+        System.out.print("Enter your choice: ");
+        String userChoice = scan.nextLine();
+
+        switch (userChoice.toLowerCase()) {
+            case "c":
+                checkInBook(scan);
+                break;
+            case "x":
+                break;
+            default:
+                System.out.println("Invalid choice");
+        }
+
+    }
+
+    public static void checkInBook(Scanner scan) {
+        System.out.println("Enter the Id of the book you would like to check in: ");
+        int bookCheckingInId = scan.nextInt();
+        scan.nextLine();
+        for (int i = 0; i < numBooks; i++) {
+            if (books[i].getId() == bookCheckingInId) {
+                books[i].setCheckedOut(false);
+                books[i].setCheckedOutTo("");
+            }
+        }
+        System.out.println("Thank you for checking the book!");
+    }
+}
+
 
